@@ -6,8 +6,21 @@ Dependency injection is a design pattern that encourages writing decoupled code 
 
 #HSLIDE
 
+Dependency injection is a design pattern that encourages writing decoupled code by passing components and services into a class.
+
+Component: a local piece of code like a library or another class
+Service: an external resource like an API or a database
+
+#HSLIDE
+
+Dependency injection is a design pattern that encourages writing decoupled code by passing components and services into a class.
+
+Why Decouple: Easier testing, more code portability, separation of concerns
+
+#HSLIDE
+
 Setter Injection
-================
+----------------
 
 Pass a dependency into a class using a setter method.
 
@@ -21,7 +34,7 @@ Example: An ActiveMQ library might allow you to inject different transports depe
 #HSLIDE
 
 Constructor Injection
-=====================
+---------------------
 
 Pass a dependency into a class in the constructor.
 
@@ -33,6 +46,9 @@ Pass a dependency into a class in the constructor.
                 }
         }
 
+#HSLIDE
+
+Let's work through an example
 
 #HSLIDE?gist=eb698ecf38712f53cb04ab54308e08b6
 
@@ -78,5 +94,9 @@ Code example with basic DI (constructor injection)
 #HSLIDE?gist=7ea1c60ad6bb36fb4b7c577e15525ba1
 
 Now we can test the ContactController in isolation and mock the other objects.
+
+#HSLIDE?gist=495f2a55c497924dc959f061ae7ba6e4
+
+Containers let you define dependencies and write functions to explain how to create an instance
 
 Cleaning up 
