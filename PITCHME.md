@@ -75,7 +75,7 @@ ContactDAO has a hard dependency on a specific database library
 
 #HSLIDE?gist=eb698ecf38712f53cb04ab54308e08b6
 
-How do we test this? We have to have a test db set up, and we have to test the entire endpoint together
+How do we test this? We need a test db, and there's no way to test just viewContact() or getContactPosts().
 
 #HSLIDE?gist=e83bc582da3064a7a05e2d1b4495fa71
 
