@@ -8,8 +8,8 @@ Dependency injection is a design pattern that encourages writing decoupled code 
 
 Dependency injection is a design pattern that encourages writing decoupled code by passing components and services into a class.
 
-- *Component*: a local piece of code like a library or another class
-- *Service*: an external resource like an API or a database
+ - *Component*: a local piece of code like a library or another class
+ - *Service*: an external resource like an API or a database
 
 #HSLIDE
 
