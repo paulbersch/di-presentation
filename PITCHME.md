@@ -1,4 +1,5 @@
 DI Injection and Testing
+------------------------
 
 #HSLIDE
 
@@ -6,16 +7,17 @@ Dependency injection is a design pattern that encourages writing decoupled code 
 
 #HSLIDE
 
- - *Component*: a local piece of code like a library or another class
- - *Service*: an external resource like an API or a database
+*Component*: a local piece of code like a library or another class
+
+*Service*: an external resource like an API or a database
 
 #HSLIDE
-
-Dependency injection is a design pattern that encourages writing decoupled code by passing components and services into a class.
 
 Why Decouple
 ------------
 Easier testing, more code portability, separation of concerns
+
+Unit tests and DI promote a virtuous cycle of decoupling code and focusing tests.
 
 #HSLIDE
 
@@ -58,10 +60,6 @@ Code example without DI
 
 There are some problems here
 
-#VSLIDE?gist=eb698ecf38712f53cb04ab54308e08b6
-
-ContactController and ContactDAO are coupled
-
 #HSLIDE?gist=eb698ecf38712f53cb04ab54308e08b6
 
 ContactController and ContactDAO are coupled
@@ -95,8 +93,64 @@ Code example with basic DI (constructor injection)
 
 Now we can test the ContactController in isolation and mock the other objects.
 
+#HSLIDE
+
+We've moved some complexity further up the stack.
+
+    $dbConnection = new DatabaseConnection('mysql:host=localhost;dbname=test', $user, $pass);
+    $fbAPI = new FacebookAPI($_GLOBALS['fb_api_key']);
+    $controller = new ContactController($dbConnection, $fbAPI);
+
+This won't scale very well, especially for classes that are harder to set up.
+
+#HSLIDE
+
+Dependency Injection Frameworks
+-------------------------------
+
+DI frameworks exist to organize the code you need to construct your objects,
+and to help reduce the amount of boilerplate you need to get an instance.
+
+Most PHP DI is built around the concept of Containers, which is just an object that knows how to
+instantiate other objects.
+
+#HSLIDE
+
+Container Interop
+-----------------
+
+An emerging standard for defining how containers work in PHP applications.
+
+        interface ContainerInterface {
+                // return an instance or configuration parameter
+                public function get(String $id);
+                // returns True if there is an entry for the identifier
+                public function has(String $id);
+        }
+
 #HSLIDE?gist=495f2a55c497924dc959f061ae7ba6e4
 
 Containers let you define dependencies and write functions to explain how to create an instance
 
-Cleaning up 
+#HSLIDE 
+
+When to use dependency injection:
+ - when you're calling `new Object()` in a constructor
+ - when a class needs to call an external service, like a 3rd party API or a database
+ - when you're using a class from an external library
+ - to decouple implementation and configuration
+
+#HSLIDE
+
+Going forward:
+ - How can we remove global-scoped resources?
+ - Start using a DI framework in our code?
+ - Write unit tests for new code to promote DI and decoupling
+
+#HSLIDE
+
+Further reading:
+ - http://fabien.potencier.org/what-is-dependency-injection.html
+ - https://www.martinfowler.com/articles/injection.html
+ - http://php-di.org/doc/getting-started.html
+ - https://github.com/container-interop/container-interop
