@@ -1,4 +1,4 @@
-DI Injection and Testing
+Dependency Injection and Testing
 ------------------------
 
 #HSLIDE
