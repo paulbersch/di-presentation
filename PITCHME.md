@@ -4,6 +4,36 @@ DI Injection and Testing
 
 Dependency injection is a design pattern that encourages writing decoupled code by passing components and services into a class.
 
+#HSLIDE
+
+Setter Injection
+================
+
+Pass a dependency into a class using a setter method.
+
+Example: An ActiveMQ library might allow you to inject different transports depending on what protocol you want to use to communicate with the server.
+
+    ActiveMQClient amqClient = new ActiveMQClient();
+    amqClient.setTransport(new HttpTransport());
+    # OR
+    amqClient.setTransport(new STOMPTransport());
+
+#HSLIDE
+
+Constructor Injection
+=====================
+
+Pass a dependency into a class in the constructor.
+
+        class UserDAO {
+                $dbConnection;
+                function __constructor(DbConnection $dbConnection) {
+                        // instead of calling new DbConnection() here or having one in $_GLOBALS
+                        $this->dbConnection = $dbConnection
+                }
+        }
+
+
 #HSLIDE?gist=eb698ecf38712f53cb04ab54308e08b6
 
 Code example without DI
@@ -32,3 +62,21 @@ ContactDAO has a hard dependency on a specific database library
 #HSLIDE?gist=eb698ecf38712f53cb04ab54308e08b6
 
 How do we test this? We have to have a test db set up, and we have to test the entire endpoint together
+
+#HSLIDE?gist=e83bc582da3064a7a05e2d1b4495fa71
+
+It's pretty hard to unit test even this simple example!
+
+#HSLIDE
+
+Let's try applying some Basic DI to this example
+
+#HSLIDE?gist=9964dc253d13b9497a3424c03e42110e
+
+Code example with basic DI (constructor injection)
+
+#HSLIDE?gist=7ea1c60ad6bb36fb4b7c577e15525ba1
+
+Now we can test the ContactController in isolation and mock the other objects.
+
+Cleaning up 
